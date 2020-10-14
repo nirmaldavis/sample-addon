@@ -51,8 +51,8 @@ spec:
       ---
       ## Configure metrics exporter
       ##
-      metrics:
-        enabled: true
-        serviceMonitor:
-          enabled: true
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: 300m
       
