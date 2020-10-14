@@ -1,0 +1,58 @@
+---
+# ------------------------------------------------------------------------------
+# PostgreSQL
+#
+#
+# PostgreSQL is an open source databasesolution for Kubernetes.
+# See more about PostgreSQL at:
+#
+# * https://www.postgresql.org/
+#
+# Implementation
+#
+#
+# Our implementation of PostgreSQL currently supports 
+#
+
+# ------------------------------------------------------------------------------
+apiVersion: kubeaddons.mesosphere.io/v1beta1
+kind: Addon
+metadata:
+  name: postgresql
+  namespace: kubeaddons
+  labels:
+    kubeaddons.mesosphere.io/name: postgresql
+    # TODO: we're temporarily supporting dependency on an existing default storage class
+    # on the cluster, this hack will trigger re-queue on Addons until one exists.
+    kubeaddons.mesosphere.io/hack-requires-defaultstorageclass: "true"
+  annotations:
+    catalog.kubeaddons.mesosphere.io/addon-revision: "6.8.2-7"
+    appversion.kubeaddons.mesosphere.io/postgresql: "6.8.2"
+    values.chart.helm.kubeaddons.mesosphere.io/postgresql: "https://raw.githubusercontent.com/helm/charts/master/stable/postgresql/values.yaml"
+spec:
+  kubernetes:
+    minSupportedVersion: v1.15.0
+  cloudProvider:
+    - name: aws
+      enabled: true
+    - name: azure
+      enabled: true
+    - name: gcp
+      enabled: true
+    - name: docker
+      enabled: false
+    - name: none
+      enabled: true
+  chartReference:
+    chart: stable/postgresql
+    # repo: https://kubernetes-charts.storage.googleapis.com/
+    version: 8.6.4
+    values: |
+      ---
+      ## Configure metrics exporter
+      ##
+      metrics:
+        enabled: false
+          serviceMonitor:
+            enabled: false
+      

@@ -1,0 +1,12 @@
+---
+postgresql:
+  display_name: postgresql
+  description: postgresql
+  logo: postgresql/logo.svg
+  category: other
+  overview: postgresql/overview.md
+  resources:
+    links:
+      - type: support
+        title: Submit a Support Request
+        link: https://d2iq.com/services-and-support
