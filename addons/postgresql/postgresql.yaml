@@ -52,7 +52,7 @@ spec:
       ## Configure metrics exporter
       ##
       metrics:
-        enabled: false
-          serviceMonitor:
-            enabled: false
+        enabled: true
+        serviceMonitor:
+          enabled: true
       
